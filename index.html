@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoinMarketCap</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    
+    <style>
+        *{
+            border: 0;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            list-style-type: none !important;
+            text-decoration: none !important;
+        }
+        body{
+            background-color: #0D1421; 
+            color: white;
+            min-height: 100vh;
+        }
+        .chcolor li a:hover{
+            color: #3772FF !important; 
+            transition: all 0.3s;
+        }
+        ::placeholder{
+            color: white !important;
+            opacity: 0.5 !important;
+        }
+        .boxsearch:hover{
+            background-color: #646B80 !important;
+        }
+        .aibox:hover{
+            background-color: #F5F9FF !important;
+        }
+        .hoverbox:hover{
+            background-color: #222531 !important;
+        }
+        @media screen and (min-width:700px) {
+            .hider{
+                display: none;
+            }
+        }
+        @media screen and (min-width:1201px) {
+            .hider{
+                display: block;
+            }
+        }
+        
+        .fixedbug {
+            overflow-x: auto; 
+            -ms-overflow-style: none;
+            scrollbar-width: none; 
+        }
+
+
+        .fixedbug   ::-webkit-scrollbar {
+            display: none; 
+        }
+        @media screen and (max-width:992px) {
+            .chcolor li{
+                border-bottom: 1px solid white;
+            }
+        }
+        @keyframes scroll {
+            0%{top: -2000px;}
+            25%{top: 0;}
+            50%{transform: skew(-30deg);}
+            75%{bottom: 5000vh;}
+            100%{color: red;}
+        }
+        .boxfan:hover{
+           border: 2px solid blue;
+        }
+</style>
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg border-bottom p-3" style="background-color: #0D1421; border-color: #222531 !important;">
+        <div class="container-fluid">
+            <img src="img/download.png" class="img-fluid rounded-5 me-2 d-none d-lg-flex" width="40" alt="Logo">
+            <a class="navbar-brand fw-bolder text-white d-none d-lg-flex" href="#">CoinMarketCap</a>
+            
+            <div class="row d-lg-none" style="width: 80%;">
+                <div class="col d-flex align-items-center " style="animation: scroll 11s;animation-iteration-count: infinite;animation-direction: alternate; animation-fill-mode: backwards; font-size: 12px; white-space: nowrap; position: relative;"><div>ETH Gas : 0.39Gewp</div></div>
+                <div class="col d-flex align-items-center justify-content-end">
+                    <i class="bi bi-search fs-5 me-2 text-secondary"></i>
+                    <i class="bi bi-gem text-primary fs-5 "></i>
+                </div>
+            </div>
+            
+            <button class="navbar-toggler bg-primary" style="width: 20%;" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 chcolor d-lg-flex align-items-lg-center justify-content-lg-start">
+                    <li class="nav-item d-lg-none d-flex align-items-center"><a class="nav-link fw-bolder text-white" href="#">
+                        <img src="img/download.png " class="img-fluid rounded-5" width="35" alt="">
+                        <span class="fs-5">Coinmarketcap</span>
+                    </a></li>
+                    <li class="nav-item"><a class="nav-link fw-bolder text-white" href="#">Cryptocurrencies</a></li>
+                    <li class="nav-item"><a class="nav-link fw-bolder text-white" href="#">Exchanges</a></li>
+                    <li class="nav-item"><a class="nav-link fw-bolder text-white" href="#">NFT</a></li>
+                    <li class="nav-item"><a class="nav-link fw-bolder text-white hider" href="#">Products</a></li>
+                    <li class="nav-item"><a class="nav-link fw-bolder text-white hider" href="#">Community</a></li>
+                    <li class="nav-item"><a class="nav-link fw-bolder text-white" href="#">CMC Luanch</a></li>
+                </ul>
+                
+                <form class="d-flex align-items-center" role="search">
+                    <div class="row d-none d-xl-flex align-items-center gx-2 text-nowrap">
+                        <div class="col-xl-2 col-xxl-2">
+                            <div class="hoverbox rounded-2 p-2 text-white" style="cursor: pointer;"><i class="bi bi-slash-circle me-1"></i><span>Portfolio</span></div>
+                        </div>
+                        <div class="col-xl-3 col-xxl-3">
+                            <div class="boxsearch p-1 d-flex align-items-center rounded-2" style="background-color: #323546; cursor: pointer;">
+                                <i class="bi bi-search text-white opacity-50 ms-2"></i>
+                                <input class="form-control bg-transparent border-0 text-white h-25" type="search" placeholder="Search" aria-label="Search" style="padding: 0.375rem 0.5rem;"/>
+                                <div class="rounded-2 fw-bold text-white" style="background-color: #646B80; padding: 3px 7px;">/</div>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-xxl-2">
+                            <div class="p-2 rounded-2 d-flex align-items-center aibox justify-content-center text-white" style="background-color: #1E274F; cursor: pointer;"><i class="bi bi-chat-left-text text-primary me-1"></i><a href="#" class="fw-bold text-primary">CMS AI</a></div>
+                        </div>
+                        <div class="col-xl-1 col-xxl-1">
+                            <div class="p-2 rounded-2 text-center" style="background-color: #2B2E3F; cursor: pointer;"><i class="bi bi-qr-code-scan text-secondary"></i></div>
+                        </div>
+                        <div class="col-xl-2 col-xxl-2">
+                            <button class="btn btn-primary fw-bold p-2 w-100 text-nowrap" type="submit">Log In</button>
+                        </div>
+                        <div class="col-xl-2 col-xxl-2 text-end">
+                            <div class="rounded-5 border border-secondary d-inline-flex align-items-center justify-content-end p-1" style="cursor: pointer;">
+                                <i class="bi bi-list fs-5 me-1"></i>
+                                <img src="img/download (1).png" alt="Profile" class="img-fluid rounded-circle" width="30">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                
+                <form class="d-lg-none">
+                    <a href=""><div class="d-flex align-items-center justify-content-center bg-primary text-white p-2 rounded-3">create an account</div></a>
+                    <a href=""><div class="d-flex align-items-center justify-content-center bg-primary text-white p-2 rounded-3 mt-3">Log In</div></a>
+                    <div class="row mt-2 d-flex align-items-center justify-content-center ">
+                        <div class="col-5 d-flex align-items-center justify-content-center m-2 p-2 rounded-3" style="background-color: #323546;">English</div>
+                        <div class="col-5 d-flex align-items-center justify-content-center m-2 p-2 rounded-3" style="background-color: #323546;">USD</div>
+                    </div>
+                    <div class="row rounded-3 p-2" style="background-color: #323546;">
+                        <div class="col d-flex align-items-center justify-content-center rounded-3 p-1">Light</div>
+                        <div class="col d-flex align-items-center justify-content-center rounded-3 p-1" style="background-color: #222531;">Dark</div>
+                        <div class="col d-flex align-items-center justify-content-center rounded-3 p-1">System</div>
+                    </div>
+                </form>
+
+                <form class="d-none d-lg-flex d-xl-none me-3" role="search">
+                    <div class="boxsearch p-1 d-flex align-items-center rounded-2" style="background-color: #323546; cursor: pointer;">
+                        <i class="bi bi-search text-white opacity-50 ms-2"></i>
+                        <input class="form-control bg-transparent border-0 text-white h-25" type="search" placeholder="Search" aria-label="Search" style="padding: 0.375rem 0.5rem;"/>
+                        <div class="rounded-2 fw-bold text-white" style="background-color: #646B80; padding: 3px 7px;">/</div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid border-bottom  p-2 text-secondary fw-bold " style="background-color: #0D1421; border-color: #222531 !important;">
+        <div class="container d-flex overflow-auto fixedbug">
+            <div class="row d-flex ">
+                <div class="d-flex  align-items-center " style="white-space: nowrap;">
+                    <i class="bi bi-chat-left-text text-primary me-1"></i><a href="#" class="fw-bold text-white">CMS AI</a> 
+                     <div class="p-2 rounded-4 me-2 " style="background-color: #1F2A58;"><i class="bi bi-fire text-danger"></i><span class="text-white " >Are altcoin outperforming Bitcoin?</span> </div>
+                    <div class="p-2 rounded-4 me-2 " style="background-color: #1F2A58;"><i class="bi bi-alarm text-primary"></i><span class="text-white " >Are altcoin outperforming Bitcoin?</span> </div>
+                    <div class="p-2 rounded-4 me-2 " style="background-color: #1F2A58;"><i class="bi bi-arrows-angle-contract text-success"></i></i><span class="text-white " >what are the trending narratives?</span> </div>
+                    <div class="p-2 rounded-4 me-2 " style="background-color: #1F2A58;"><i class="bi bi-stopwatch text-white"></i><span class="text-white " >what are the market sentivies?</span> </div>
+                    <div class="p-2 rounded-4 me-2 " style="background-color: #1F2A58;"><i class="bi bi-chat-square-dots text-info"></i><span class="text-white " >what upcoming events impact crypto?</span> </div>
+                </div>
+
+                <div class="d-flex flex-nowrap d-sm-flex  mt-2 mb-4" style="border-color: #222531 !important;">
+                    <div class="bg-gradient rounded-3 me-2 boxfan text-white pe-5 p-1 ">
+                        <p>Market Cap</p>
+                        <p>4.14T <span style="color: red;">-0.7</span></p>
+                        <img src="img/1027.svg" alt="" class="img-fluid d-none d-lg-flex">
+                    </div>
+                    <div class="bg-gradient rounded-3 me-2 boxfan text-white pe-5 p-1 ">
+                        <p>CMC 20</p>
+                        <p>263.22 <span style="color: red;">-1.73</span></p>
+                        <img src="img/32196.svg" alt="" class="img-fluid d-none d-lg-flex">
+                    </div>
+                    <div class="bg-gradient rounded-3 me-2 boxfan text-white  p-1 pe-5 ">
+                        <p>Fear & Greed</p>
+                        <p>5.8 <span style="opacity: 0.5;"> / 10</span></p>
+                        <img src="img/29470.svg" class="img-fluid d-none d-lg-flex" alt="">
+                    </div>
+                    <div class="bg-gradient rounded-3 me-2 boxfan text-white  p-1 ">
+                        <p>Altcoin New Season</p>
+                        <p class="d-none d-lg-flex">42.79 <span style="opacity: 0.5;">/ 100</span></p>
+                        <div class="position-relative  mt-4">
+                            <input type="range" >
+                            <span style="position: absolute;top: -15px; left: 0; opacity: 0.5; color: yellow;">Bitcoin</span>
+                            <span style="position: absolute;top: -15px; right: 0; opacity: 0.5; color: green;">Altcoin</span>
+                        </div>
+                    </div>
+                    <div class="bg-gradient rounded-3 me-2 boxfan text-white pe-5 p-1 ">
+                        <p>Average Crypto RSI</p>
+                        <p class="d-none d-lg-flex">42.79 <span style="opacity: 0.5;">/ 100</span></p>
+                        <div class="position-relative  mt-4">
+                            <input type="range" >
+                            <span style="position: absolute;top: -15px; left: 0; opacity: 0.5; color: yellow; font-size: 10px;">Oversold</span>
+                            <span style="position: absolute;top: -15px; right: 0; opacity: 0.5; color: green; font-size: 10px;">Overbought</span>
+                        </div>
+                    </div>
+                    <div class="bg-gradient rounded-3 me-2 boxfan text-white pe-5 p-1 ">
+                        <p>Bitcoin</p>
+                        <p>4.14T <span style="color: green;">+2.7</span></p>
+                        <img src="img/32196.svg" alt="" class="img-fluid d-none d-lg-flex">
+                    </div>
+                    <div class=" rounded-3 me-2 boxfan text-white pe-5 p-1 d-lg-none " style="background-image: url(img/bnb.png); ">
+                        <p class="text-danger">Hot Topic</p>
+                        <span>The Crypto are so highed at this season likes ETH . BNB and special of that is Bitcoin </span>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main class="container mt-4 mb-5">
+        
+        
+        
+
+        <div class="table-responsive">
+            <table class="table table-dark table-hover align-middle" style="--bs-table-bg: #0D1421;">
+                
+                <thead >
+                    <tr class="text-secondary text-nowrap border-bottom" style="border-color: #222531 !important;">
+                        <th scope="col" style="width: 50px;">#</th>
+                        <th scope="col" style="width: 200px;">Name</th>
+                        <th scope="col">Price</th>
+                        <th scope="col" class="text-end">24h %</th>
+                        <th scope="col" class="text-end d-none d-md-table-cell">7d %</th>
+                        <th scope="col" class="text-end d-none d-lg-table-cell">Market Cap</th>
+                        <th scope="col" class="text-end d-none d-xl-table-cell">Volume(24h)</th>
+                        <th scope="col" class="text-end d-none d-xl-table-cell">Circulating Supply</th>
+                        <th scope="col" class="d-none d-xl-table-cell">Last 7 Days</th>
+                    </tr>
+                </thead>
+                
+                <tbody class="border-top-0">
+                    <tr class="hoverbox border-bottom" style="cursor: pointer; border-color: #222531 !important;">
+                        <td>1</td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img src="img/1.png" alt="BTC" width="28" class="me-2 rounded-circle">
+                                <span class="fw-bold text-white me-2 text-nowrap">Bitcoin</span>
+                                <span class="text-secondary text-uppercase d-none d-sm-block">BTC</span>
+                            </div>
+                        </td>
+                        <td class="text-nowrap">$62,500.00</td>
+                        <td class="text-success text-end text-nowrap"><i class="bi bi-caret-up-fill"></i> 0.53%</td>
+                        <td class="text-danger text-end text-nowrap d-none d-md-table-cell"><i class="bi bi-caret-down-fill"></i> 1.2%</td>
+                        <td class="text-end d-none d-lg-table-cell text-nowrap">$1.24 T</td>
+                        <td class="text-end d-none d-xl-table-cell text-nowrap">$35.8 B</td>
+                        <td class="text-end d-none d-xl-table-cell text-nowrap">19.7M BTC</td>
+                        <td class="d-none d-xl-table-cell"><img src="img/chart1.png" alt="Graph" height="40"></td> 
+                    </tr>
+                    
+                    <tr class="hoverbox border-bottom" style="cursor: pointer; border-color: #222531 !important;">
+                        <td>2</td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img src="img/ethereum.png" alt="ETH" width="28" class="me-2 rounded-circle">
+                                <span class="fw-bold text-white me-2 text-nowrap">Ethereum</span>
+                                <span class="text-secondary text-uppercase d-none d-sm-block">ETH</span>
+                            </div>
+                        </td>
+                        <td class="text-nowrap">$3,450.00</td>
+                        <td class="text-success text-end text-nowrap"><i class="bi bi-caret-up-fill"></i> 1.87%</td>
+                        <td class="text-success text-end text-nowrap d-none d-md-table-cell"><i class="bi bi-caret-up-fill"></i> 5.6%</td>
+                        <td class="text-end d-none d-lg-table-cell text-nowrap">$414 B</td>
+                        <td class="text-end d-none d-xl-table-cell text-nowrap">$18.1 B</td>
+                        <td class="text-end d-none d-xl-table-cell text-nowrap">120.1M ETH</td>
+                        <td class="d-none d-xl-table-cell"><img src="img/chart2.png" alt="Graph" height="40"></td>
+                    </tr>
+                    
+                    <tr class="hoverbox border-bottom" style="cursor: pointer; border-color: #222531 !important;">
+                        <td>3</td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img src="img/tether.png" alt="USDT" width="28" class="me-2 rounded-circle">
+                                <span class="fw-bold text-white me-2 text-nowrap">Tether USDt</span>
+                                <span class="text-secondary text-uppercase d-none d-sm-block">USDT</span>
+                            </div>
+                        </td>
+                        <td class="text-nowrap">$1.00</td>
+                        <td class="text-danger text-end text-nowrap"><i class="bi bi-caret-down-fill"></i> 0.01%</td>
+                        <td class="text-danger text-end text-nowrap d-none d-md-table-cell"><i class="bi bi-caret-down-fill"></i> 0.05%</td>
+                        <td class="text-end d-none d-lg-table-cell text-nowrap">$112 B</td>
+                        <td class="text-end d-none d-xl-table-cell text-nowrap">$42.3 B</td>
+                        <td class="text-end d-none d-xl-table-cell text-nowrap">112 B USDT</td>
+                        <td class="d-none d-xl-table-cell"><img src="img/chart3.png" alt="Graph" height="40"></td>
+                    </tr>
+
+                    <tr class="hoverbox border-bottom" style="cursor: pointer; border-color: #222531 !important;">
+                        <td>4</td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img src="img/tether.png" alt="USDT" width="28" class="me-2 rounded-circle">
+                                <span class="fw-bold text-white me-2 text-nowrap">Tether USDt</span>
+                                <span class="text-secondary text-uppercase d-none d-sm-block">USDT</span>
+                            </div>
+                        </td>
+                        <td class="text-nowrap">$1.00</td>
+                        <td class="text-danger text-end text-nowrap"><i class="bi bi-caret-down-fill"></i> 0.01%</td>
+                        <td class="text-danger text-end text-nowrap d-none d-md-table-cell"><i class="bi bi-caret-down-fill"></i> 0.05%</td>
+                        <td class="text-end d-none d-lg-table-cell text-nowrap">$112 B</td>
+                        <td class="text-end d-none d-xl-table-cell text-nowrap">$42.3 B</td>
+                        <td class="text-end d-none d-xl-table-cell text-nowrap">112 B USDT</td>
+                        <td class="d-none d-xl-table-cell"><img src="img/chart3.png" alt="Graph" height="40"></td>
+                    </tr>
+
+                    <tr class="hoverbox border-bottom" style="cursor: pointer; border-color: #222531 !important;">
+                        <td>5</td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img src="img/tether.png" alt="USDT" width="28" class="me-2 rounded-circle">
+                                <span class="fw-bold text-white me-2 text-nowrap">Tether USDt</span>
+                                <span class="text-secondary text-uppercase d-none d-sm-block">USDT</span>
+                            </div>
+                        </td>
+                        <td class="text-nowrap">$1.00</td>
+                        <td class="text-danger text-end text-nowrap"><i class="bi bi-caret-down-fill"></i> 0.01%</td>
+                        <td class="text-danger text-end text-nowrap d-none d-md-table-cell"><i class="bi bi-caret-down-fill"></i> 0.05%</td>
+                        <td class="text-end d-none d-lg-table-cell text-nowrap">$112 B</td>
+                        <td class="text-end d-none d-xl-table-cell text-nowrap">$42.3 B</td>
+                        <td class="text-end d-none d-xl-table-cell text-nowrap">112 B USDT</td>
+                        <td class="d-none d-xl-table-cell"><img src="img/chart3.png" alt="Graph" height="40"></td>
+                    </tr>
+
+                    <tr class="hoverbox border-bottom" style="cursor: pointer; border-color: #222531 !important;">
+                        <td>6</td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img src="img/tether.png" alt="USDT" width="28" class="me-2 rounded-circle">
+                                <span class="fw-bold text-white me-2 text-nowrap">Tether USDt</span>
+                                <span class="text-secondary text-uppercase d-none d-sm-block">USDT</span>
+                            </div>
+                        </td>
+                        <td class="text-nowrap">$1.00</td>
+                        <td class="text-danger text-end text-nowrap"><i class="bi bi-caret-down-fill"></i> 0.01%</td>
+                        <td class="text-danger text-end text-nowrap d-none d-md-table-cell"><i class="bi bi-caret-down-fill"></i> 0.05%</td>
+                        <td class="text-end d-none d-lg-table-cell text-nowrap">$112 B</td>
+                        <td class="text-end d-none d-xl-table-cell text-nowrap">$42.3 B</td>
+                        <td class="text-end d-none d-xl-table-cell text-nowrap">112 B USDT</td>
+                        <td class="d-none d-xl-table-cell"><img src="img/chart3.png" alt="Graph" height="40"></td>
+                    </tr>
+
+                    <tr class="hoverbox border-bottom" style="cursor: pointer; border-color: #222531 !important;">
+                        <td>7</td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img src="img/tether.png" alt="USDT" width="28" class="me-2 rounded-circle">
+                                <span class="fw-bold text-white me-2 text-nowrap">Tether USDt</span>
+                                <span class="text-secondary text-uppercase d-none d-sm-block">USDT</span>
+                            </div>
+                        </td>
+                        <td class="text-nowrap">$1.00</td>
+                        <td class="text-danger text-end text-nowrap"><i class="bi bi-caret-down-fill"></i> 0.01%</td>
+                        <td class="text-danger text-end text-nowrap d-none d-md-table-cell"><i class="bi bi-caret-down-fill"></i> 0.05%</td>
+                        <td class="text-end d-none d-lg-table-cell text-nowrap">$112 B</td>
+                        <td class="text-end d-none d-xl-table-cell text-nowrap">$42.3 B</td>
+                        <td class="text-end d-none d-xl-table-cell text-nowrap">112 B USDT</td>
+                        <td class="d-none d-xl-table-cell"><img src="img/chart3.png" alt="Graph" height="40"></td>
+                    </tr>
+
+                    <tr class="hoverbox border-bottom" style="cursor: pointer; border-color: #222531 !important;">
+                        <td>8</td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img src="img/tether.png" alt="USDT" width="28" class="me-2 rounded-circle">
+                                <span class="fw-bold text-white me-2 text-nowrap">Tether USDt</span>
+                                <span class="text-secondary text-uppercase d-none d-sm-block">USDT</span>
+                            </div>
+                        </td>
+                        <td class="text-nowrap">$1.00</td>
+                        <td class="text-danger text-end text-nowrap"><i class="bi bi-caret-down-fill"></i> 0.01%</td>
+                        <td class="text-danger text-end text-nowrap d-none d-md-table-cell"><i class="bi bi-caret-down-fill"></i> 0.05%</td>
+                        <td class="text-end d-none d-lg-table-cell text-nowrap">$112 B</td>
+                        <td class="text-end d-none d-xl-table-cell text-nowrap">$42.3 B</td>
+                        <td class="text-end d-none d-xl-table-cell text-nowrap">112 B USDT</td>
+                        <td class="d-none d-xl-table-cell"><img src="img/chart3.png" alt="Graph" height="40"></td>
+                    </tr>
+
+                    <tr class="hoverbox border-bottom" style="cursor: pointer; border-color: #222531 !important;">
+                        <td>9</td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img src="img/tether.png" alt="USDT" width="28" class="me-2 rounded-circle">
+                                <span class="fw-bold text-white me-2 text-nowrap">Tether USDt</span>
+                                <span class="text-secondary text-uppercase d-none d-sm-block">USDT</span>
+                            </div>
+                        </td>
+                        <td class="text-nowrap">$1.00</td>
+                        <td class="text-danger text-end text-nowrap"><i class="bi bi-caret-down-fill"></i> 0.01%</td>
+                        <td class="text-danger text-end text-nowrap d-none d-md-table-cell"><i class="bi bi-caret-down-fill"></i> 0.05%</td>
+                        <td class="text-end d-none d-lg-table-cell text-nowrap">$112 B</td>
+                        <td class="text-end d-none d-xl-table-cell text-nowrap">$42.3 B</td>
+                        <td class="text-end d-none d-xl-table-cell text-nowrap">112 B USDT</td>
+                        <td class="d-none d-xl-table-cell"><img src="img/chart3.png" alt="Graph" height="40"></td>
+                    </tr>
+
+                    <tr class="hoverbox border-bottom" style="cursor: pointer; border-color: #222531 !important;">
+                        <td>10</td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img src="img/tether.png" alt="USDT" width="28" class="me-2 rounded-circle">
+                                <span class="fw-bold text-white me-2 text-nowrap">Tether USDt</span>
+                                <span class="text-secondary text-uppercase d-none d-sm-block">USDT</span>
+                            </div>
+                        </td>
+                        <td class="text-nowrap">$1.00</td>
+                        <td class="text-danger text-end text-nowrap"><i class="bi bi-caret-down-fill"></i> 0.01%</td>
+                        <td class="text-danger text-end text-nowrap d-none d-md-table-cell"><i class="bi bi-caret-down-fill"></i> 0.05%</td>
+                        <td class="text-end d-none d-lg-table-cell text-nowrap">$112 B</td>
+                        <td class="text-end d-none d-xl-table-cell text-nowrap">$42.3 B</td>
+                        <td class="text-end d-none d-xl-table-cell text-nowrap">112 B USDT</td>
+                        <td class="d-none d-xl-table-cell"><img src="img/chart3.png" alt="Graph" height="40"></td>
+                    </tr>
+
+                    <tr class="hoverbox border-bottom" style="cursor: pointer; border-color: #222531 !important;">
+                        <td>11</td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img src="img/tether.png" alt="USDT" width="28" class="me-2 rounded-circle">
+                                <span class="fw-bold text-white me-2 text-nowrap">Tether USDt</span>
+                                <span class="text-secondary text-uppercase d-none d-sm-block">USDT</span>
+                            </div>
+                        </td>
+                        <td class="text-nowrap">$1.00</td>
+                        <td class="text-danger text-end text-nowrap"><i class="bi bi-caret-down-fill"></i> 0.01%</td>
+                        <td class="text-danger text-end text-nowrap d-none d-md-table-cell"><i class="bi bi-caret-down-fill"></i> 0.05%</td>
+                        <td class="text-end d-none d-lg-table-cell text-nowrap">$112 B</td>
+                        <td class="text-end d-none d-xl-table-cell text-nowrap">$42.3 B</td>
+                        <td class="text-end d-none d-xl-table-cell text-nowrap">112 B USDT</td>
+                        <td class="d-none d-xl-table-cell"><img src="img/chart3.png" alt="Graph" height="40"></td>
+                    </tr>
+
+                    <tr class="hoverbox border-bottom" style="cursor: pointer; border-color: #222531 !important;">
+                        <td>12</td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img src="img/tether.png" alt="USDT" width="28" class="me-2 rounded-circle">
+                                <span class="fw-bold text-white me-2 text-nowrap">Tether USDt</span>
+                                <span class="text-secondary text-uppercase d-none d-sm-block">USDT</span>
+                            </div>
+                        </td>
+                        <td class="text-nowrap">$1.00</td>
+                        <td class="text-danger text-end text-nowrap"><i class="bi bi-caret-down-fill"></i> 0.01%</td>
+                        <td class="text-danger text-end text-nowrap d-none d-md-table-cell"><i class="bi bi-caret-down-fill"></i> 0.05%</td>
+                        <td class="text-end d-none d-lg-table-cell text-nowrap">$112 B</td>
+                        <td class="text-end d-none d-xl-table-cell text-nowrap">$42.3 B</td>
+                        <td class="text-end d-none d-xl-table-cell text-nowrap">112 B USDT</td>
+                        <td class="d-none d-xl-table-cell"><img src="img/chart3.png" alt="Graph" height="40"></td>
+                    </tr>
+
+                    <tr class="hoverbox border-bottom" style="cursor: pointer; border-color: #222531 !important;">
+                        <td>13</td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img src="img/tether.png" alt="USDT" width="28" class="me-2 rounded-circle">
+                                <span class="fw-bold text-white me-2 text-nowrap">Tether USDt</span>
+                                <span class="text-secondary text-uppercase d-none d-sm-block">USDT</span>
+                            </div>
+                        </td>
+                        <td class="text-nowrap">$1.00</td>
+                        <td class="text-danger text-end text-nowrap"><i class="bi bi-caret-down-fill"></i> 0.01%</td>
+                        <td class="text-danger text-end text-nowrap d-none d-md-table-cell"><i class="bi bi-caret-down-fill"></i> 0.05%</td>
+                        <td class="text-end d-none d-lg-table-cell text-nowrap">$112 B</td>
+                        <td class="text-end d-none d-xl-table-cell text-nowrap">$42.3 B</td>
+                        <td class="text-end d-none d-xl-table-cell text-nowrap">112 B USDT</td>
+                        <td class="d-none d-xl-table-cell"><img src="img/chart3.png" alt="Graph" height="40"></td>
+                    </tr>
+
+                    <tr class="hoverbox border-bottom" style="cursor: pointer; border-color: #222531 !important;">
+                        <td>14</td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img src="img/tether.png" alt="USDT" width="28" class="me-2 rounded-circle">
+                                <span class="fw-bold text-white me-2 text-nowrap">Tether USDt</span>
+                                <span class="text-secondary text-uppercase d-none d-sm-block">USDT</span>
+                            </div>
+                        </td>
+                        <td class="text-nowrap">$1.00</td>
+                        <td class="text-danger text-end text-nowrap"><i class="bi bi-caret-down-fill"></i> 0.01%</td>
+                        <td class="text-danger text-end text-nowrap d-none d-md-table-cell"><i class="bi bi-caret-down-fill"></i> 0.05%</td>
+                        <td class="text-end d-none d-lg-table-cell text-nowrap">$112 B</td>
+                        <td class="text-end d-none d-xl-table-cell text-nowrap">$42.3 B</td>
+                        <td class="text-end d-none d-xl-table-cell text-nowrap">112 B USDT</td>
+                        <td class="d-none d-xl-table-cell"><img src="img/chart3.png" alt="Graph" height="40"></td>
+                    </tr>
+
+                    <tr class="hoverbox border-bottom" style="cursor: pointer; border-color: #222531 !important;">
+                        <td>15</td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img src="img/tether.png" alt="USDT" width="28" class="me-2 rounded-circle">
+                                <span class="fw-bold text-white me-2 text-nowrap">Tether USDt</span>
+                                <span class="text-secondary text-uppercase d-none d-sm-block">USDT</span>
+                            </div>
+                        </td>
+                        <td class="text-nowrap">$1.00</td>
+                        <td class="text-danger text-end text-nowrap"><i class="bi bi-caret-down-fill"></i> 0.01%</td>
+                        <td class="text-danger text-end text-nowrap d-none d-md-table-cell"><i class="bi bi-caret-down-fill"></i> 0.05%</td>
+                        <td class="text-end d-none d-lg-table-cell text-nowrap">$112 B</td>
+                        <td class="text-end d-none d-xl-table-cell text-nowrap">$42.3 B</td>
+                        <td class="text-end d-none d-xl-table-cell text-nowrap">112 B USDT</td>
+                        <td class="d-none d-xl-table-cell"><img src="img/chart3.png" alt="Graph" height="40"></td>
+                    </tr>
+
+                    <tr class="hoverbox border-bottom" style="cursor: pointer; border-color: #222531 !important;">
+                        <td>16</td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img src="img/tether.png" alt="USDT" width="28" class="me-2 rounded-circle">
+                                <span class="fw-bold text-white me-2 text-nowrap">Tether USDt</span>
+                                <span class="text-secondary text-uppercase d-none d-sm-block">USDT</span>
+                            </div>
+                        </td>
+                        <td class="text-nowrap">$1.00</td>
+                        <td class="text-danger text-end text-nowrap"><i class="bi bi-caret-down-fill"></i> 0.01%</td>
+                        <td class="text-danger text-end text-nowrap d-none d-md-table-cell"><i class="bi bi-caret-down-fill"></i> 0.05%</td>
+                        <td class="text-end d-none d-lg-table-cell text-nowrap">$112 B</td>
+                        <td class="text-end d-none d-xl-table-cell text-nowrap">$42.3 B</td>
+                        <td class="text-end d-none d-xl-table-cell text-nowrap">112 B USDT</td>
+                        <td class="d-none d-xl-table-cell"><img src="img/chart3.png" alt="Graph" height="40"></td>
+                    </tr>
+
+                    <tr class="hoverbox border-bottom" style="cursor: pointer; border-color: #222531 !important;">
+                        <td>17</td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img src="img/tether.png" alt="USDT" width="28" class="me-2 rounded-circle">
+                                <span class="fw-bold text-white me-2 text-nowrap">Tether USDt</span>
+                                <span class="text-secondary text-uppercase d-none d-sm-block">USDT</span>
+                            </div>
+                        </td>
+                        <td class="text-nowrap">$1.00</td>
+                        <td class="text-danger text-end text-nowrap"><i class="bi bi-caret-down-fill"></i> 0.01%</td>
+                        <td class="text-danger text-end text-nowrap d-none d-md-table-cell"><i class="bi bi-caret-down-fill"></i> 0.05%</td>
+                        <td class="text-end d-none d-lg-table-cell text-nowrap">$112 B</td>
+                        <td class="text-end d-none d-xl-table-cell text-nowrap">$42.3 B</td>
+                        <td class="text-end d-none d-xl-table-cell text-nowrap">112 B USDT</td>
+                        <td class="d-none d-xl-table-cell"><img src="img/chart3.png" alt="Graph" height="40"></td>
+                    </tr>
+
+                    <tr class="hoverbox border-bottom" style="cursor: pointer; border-color: #222531 !important;">
+                        <td>18</td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img src="img/tether.png" alt="USDT" width="28" class="me-2 rounded-circle">
+                                <span class="fw-bold text-white me-2 text-nowrap">Tether USDt</span>
+                                <span class="text-secondary text-uppercase d-none d-sm-block">USDT</span>
+                            </div>
+                        </td>
+                        <td class="text-nowrap">$1.00</td>
+                        <td class="text-danger text-end text-nowrap"><i class="bi bi-caret-down-fill"></i> 0.01%</td>
+                        <td class="text-danger text-end text-nowrap d-none d-md-table-cell"><i class="bi bi-caret-down-fill"></i> 0.05%</td>
+                        <td class="text-end d-none d-lg-table-cell text-nowrap">$112 B</td>
+                        <td class="text-end d-none d-xl-table-cell text-nowrap">$42.3 B</td>
+                        <td class="text-end d-none d-xl-table-cell text-nowrap">112 B USDT</td>
+                        <td class="d-none d-xl-table-cell"><img src="img/chart3.png" alt="Graph" height="40"></td>
+                    </tr>
+
+                    <tr class="hoverbox border-bottom" style="cursor: pointer; border-color: #222531 !important;">
+                        <td>19</td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img src="img/tether.png" alt="USDT" width="28" class="me-2 rounded-circle">
+                                <span class="fw-bold text-white me-2 text-nowrap">Tether USDt</span>
+                                <span class="text-secondary text-uppercase d-none d-sm-block">USDT</span>
+                            </div>
+                        </td>
+                        <td class="text-nowrap">$1.00</td>
+                        <td class="text-danger text-end text-nowrap"><i class="bi bi-caret-down-fill"></i> 0.01%</td>
+                        <td class="text-danger text-end text-nowrap d-none d-md-table-cell"><i class="bi bi-caret-down-fill"></i> 0.05%</td>
+                        <td class="text-end d-none d-lg-table-cell text-nowrap">$112 B</td>
+                        <td class="text-end d-none d-xl-table-cell text-nowrap">$42.3 B</td>
+                        <td class="text-end d-none d-xl-table-cell text-nowrap">112 B USDT</td>
+                        <td class="d-none d-xl-table-cell"><img src="img/chart3.png" alt="Graph" height="40"></td>
+                    </tr>
+
+                    <tr class="hoverbox border-bottom" style="cursor: pointer; border-color: #222531 !important;">
+                        <td>20</td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img src="img/tether.png" alt="USDT" width="28" class="me-2 rounded-circle">
+                                <span class="fw-bold text-white me-2 text-nowrap">Tether USDt</span>
+                                <span class="text-secondary text-uppercase d-none d-sm-block">USDT</span>
+                            </div>
+                        </td>
+                        <td class="text-nowrap">$1.00</td>
+                        <td class="text-danger text-end text-nowrap"><i class="bi bi-caret-down-fill"></i> 0.01%</td>
+                        <td class="text-danger text-end text-nowrap d-none d-md-table-cell"><i class="bi bi-caret-down-fill"></i> 0.05%</td>
+                        <td class="text-end d-none d-lg-table-cell text-nowrap">$112 B</td>
+                        <td class="text-end d-none d-xl-table-cell text-nowrap">$42.3 B</td>
+                        <td class="text-end d-none d-xl-table-cell text-nowrap">112 B USDT</td>
+                        <td class="d-none d-xl-table-cell"><img src="img/chart3.png" alt="Graph" height="40"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <nav aria-label="..." class="d-flex justify-content-center mt-3">
+            <ul class="pagination">
+                <li class="page-item"><a href="#" class="page-link">Previous</a></li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item active">
+                    <a class="page-link" href="#" aria-current="page">2</a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">4</a></li>
+                <li class="page-item"><a class="page-link d-none d-lg-flex" href="#">5</a></li>
+                <li class="page-item"><a class="page-link d-none d-lg-flex" href="#">6</a></li>
+                <li class="page-item"><a class="page-link" href="#">...</a></li>
+                <li class="page-item"><a class="page-link" href="#">95</a></li>
+                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+        </nav>
+
+        <div class="border-bottom">
+            <p class="opacity-100 fw-bold">Today's Cryptocurrency Prices by Market Cap</p>
+            <p class="opacity-75 fw-bold">The global crypto market cap is $4.14T, a<span class="text-danger">-1.01%</span>decrease over the last day <a href="" class="text-secondary" style="text-decoration: underline !important;">Read More</a></p>
+            <p class="opacity-50 fw-bold">Find out how we work by clicking here <a href="" class="text-secondary " style="text-decoration: underline !important;">Read More</a></p>
+        </div>
+
+
+        
+    </main>
+
+    <div class="container-fluid mt-5" style="background-color: #2B2E3D;">
+        <div class="row d-none d-lg-flex">
+            <div class="col-xl-2"></div>
+            <div class="col-lg-6 col-xl-3 offset-xl-1 fw-bolder d-flex flex-column justify-content-center ">
+                <h3>Stay on top of crypto. All the time, any time.</h3>
+                <span style="font-size: 13px;">Please keep me updated by email with the latest crypto news, research findings, reward</span>
+                <span style="font-size: 13px;">programs, event updates, coin listings and more information from CoinMarketCap.</span>
+                <div class="row mt-2 placechange">
+                    <div class="col-6 mt-3"><input class="bg-secondary p-2 rounded-3 w-100" type="email" placeholder="Enter your e-mail address"></div>
+                    <div class="col-6 mt-3"><button class="bg-primary rounded-2 p-2 text-white">Subscribe</button></div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-xl-3 offset-xl-1"><img src="img/newsletter_bg_dark.svg" class="img-fluid" alt=""></div>
+            <div class="col-xl-2"></div>
+        </div>
+        <div class="row d-lg-none p-3">
+            <div class="col-12"><img src="img/newsletter_bg_dark.svg" class="img-fluid" alt=""></div>
+            <div class="col-12"> <h3 class="fw-bolder">Stay on top of crypto. All the time, any time.</h3></div>
+            <div class="col-12">
+                <span>Please keep me updated by email with the latest crypto news, research findings, reward</span>
+                <span>programs, event updates, coin listings and more information from CoinMarketCap.</span>
+            </div>
+            <div class="col-12 mt-3"><input class="bg-secondary p-2 rounded-3 w-100" type="email" placeholder="Enter your e-mail address"></div>
+            <div class="col-12 mt-2"><button class="bg-primary rounded-2 p-2 text-white w-100">Subscribe</button></div>
+        </div>
+    </div>
+
+
+    <footer class="mt-5">
+        <div class="container-fluid">
+            <div class="row d-flex align-items-center">
+                <div class="col-12 col-lg-4">
+                    <img src="img/download.png" class="img-fluid rounded-5" width="30" alt="">
+                    <span class="fw-bold ms-2">CoinMarketCap</span>
+                </div>
+                <div class="col-lg-2"></div>
+                <div class="col-lg-2"></div>
+                <div class="col-6 col-lg-1">Products</div>
+                <div class="col-6 col-lg-1">Company</div>
+                <div class="col-6 col-lg-1">Support</div>
+                <div class="col-6 col-lg-1">Socials</div>
+                <div class="col-8"></div>
+                <div class="col-6 col-lg-1">Academi</div>
+                <div class="col-6 col-lg-1">About us</div>
+                <div class="col-6 col-lg-1">Get list</div>
+                <div class="col-6 col-lg-1">X</div>
+                <div class="col-8"></div>
+                <div class="col-6 col-lg-1">Advertise</div>
+                <div class="col-6 col-lg-1">terms</div>
+                <div class="col-6 col-lg-1">request</div>
+                <div class="col-6 col-lg-1">community</div>
+                <div class="col-8"></div>
+                <div class="col-6 col-lg-1">CMC labs</div>
+                <div class="col-6 col-lg-1">Privacy</div>
+                <div class="col-6 col-lg-1">Content</div>
+                <div class="col-6 col-lg-1">telegram</div>
+                <div class="col-8"></div>
+                <div class="col-6 col-lg-1">updates</div>
+                <div class="col-6 col-lg-1">cookie</div>
+                <div class="col-6 col-lg-1">FAQ</div>
+                <div class="col-6 col-lg-1">instagram</div>
+                <div class="col-8"></div>
+                <div class="col-6 col-lg-1">Bitcoin</div>
+                <div class="col-6 col-lg-1">policy</div>
+                <div class="col-6 col-lg-1">Glosary</div>
+                <div class="col-6 col-lg-1">facebook</div>
+                <div class="col-8"></div>
+                <div class="col-6 col-lg-1">Crypto</div>
+                <div class="col-6 col-lg-1">Rulles</div>
+                <div class="col-6 col-lg-1"></div>
+                <div class="col-6 col-lg-1">reddit</div>
+                <div class="col-8"></div>
+                <div class="col-6 col-lg-1">NFT</div>
+                <div class="col-6 col-lg-1"></div>
+                <div class="col-6 col-lg-1"></div>
+                <div class="col-6 col-lg-1">linkedin</div>
+            </div>
+        </div>
+    </footer>
+    
+
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    </body>
+</html>
